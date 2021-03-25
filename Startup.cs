@@ -35,10 +35,10 @@ namespace ShopBridge
 
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shopbridge", Version = "v1" });
-            //});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shopbridge", Version = "v1" });
+            });
             //services.AddMvc();
 
         }
@@ -49,8 +49,8 @@ namespace ShopBridge
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shopbridge v1"));
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shopbridge v1"));
             }
 
             app.UseHttpsRedirection();

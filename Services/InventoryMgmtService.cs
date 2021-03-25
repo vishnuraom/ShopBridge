@@ -39,25 +39,37 @@ namespace ShopBridge.Services
 
         public async Task UpdateItem(InventoryDTO inventoryDTO)
         {
-            Inventory inventory = inventoryDTO.ToInventory();
-            inventory.DateUpdated = DateTime.Now;
-            _dbContext.Inventories.Update(inventory);
+            Inventory inventory = _dbContext.Inventories.Find(inventoryDTO.ItemId);
+            if (inventory is null)
+            {
+                throw new Exception($"Couldn't find the record with id {inventoryDTO.ItemId}");
+            }
+            Inventory updatedinventory = inventoryDTO.ToInventory();
+            updatedinventory.DateUpdated = DateTime.Now;
+            _dbContext.Inventories.Update(updatedinventory);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteItem(int id)
         {
-            //Inventory inven = await _dbContext.Inventories.FindAsync(id);
-            //_dbContext.Inventories.Remove(inven);
-            //var i = await _dbContext.SaveChangesAsync();
-            //return i;
-
-            using (ShopBridgeDbContext sdb = new ShopBridgeDbContext())
+            Inventory inventory = _dbContext.Inventories.Find(id);
+            if (inventory is null)
             {
-                Inventory rec = await sdb.Inventories.FindAsync(id);
-                sdb.Inventories.Remove(rec);
-                await sdb.SaveChangesAsync();
+                throw new Exception($"Couldn't find the record with id {id}");
             }
+            _dbContext.Inventories.Remove(inventory);
+            await _dbContext.SaveChangesAsync();
+
+            //using (ShopBridgeDbContext sdb = new ShopBridgeDbContext())
+            //{
+            //    Inventory rec = sdb.Inventories.Find(id);
+            //    if (rec is null) 
+            //    {
+            //        throw new Exception($"Couldn't find the record with id {id}");
+            //    }
+            //    sdb.Inventories.Remove(rec);
+            //    await sdb.SaveChangesAsync();
+            //}
         }
 
     }

@@ -41,8 +41,20 @@ namespace ShopBridge.Controllers
         [Route("AddItem")]
         public async Task<int> Post([FromBody]string _inventoryDto)
         {
-            InventoryDTO inventoryDTO = JsonConvert.DeserializeObject<InventoryDTO>(_inventoryDto);
-            return await this._inventoryMgmtService.AddItem(inventoryDTO);
+            InventoryDTO inventoryDTO;
+            try
+            {
+                inventoryDTO = JsonConvert.DeserializeObject<InventoryDTO>(_inventoryDto);
+                return await this._inventoryMgmtService.AddItem(inventoryDTO);
+            }
+            catch (JsonException je) 
+            {
+                throw new Exception($"Deserialization failed with message {je.Message}, please check contract");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"AddItem failed with message: {ex.Message}, please check contract");
+            }
         }
 
         // PUT api/UpdateItem
@@ -50,8 +62,20 @@ namespace ShopBridge.Controllers
         [Route("UpdateItem")]
         public void Put([FromBody] string _inventoryDto)
         {
-            InventoryDTO inventoryDTO = JsonConvert.DeserializeObject<InventoryDTO>(_inventoryDto);
-            this._inventoryMgmtService.UpdateItem(inventoryDTO); 
+            InventoryDTO inventoryDTO;
+            try
+            {
+                inventoryDTO = JsonConvert.DeserializeObject<InventoryDTO>(_inventoryDto);
+                this._inventoryMgmtService.UpdateItem(inventoryDTO).Wait();
+            }
+            catch (JsonException je)
+            {
+                throw new Exception($"Deserialization failed with message {je.Message}, please check contract");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Update failed with message: {ex.Message}, please check contract");
+            }
         }
 
         // DELETE api/DeleteItem
@@ -59,7 +83,12 @@ namespace ShopBridge.Controllers
         [Route("DeleteItem")]
         public void Delete([FromBody] int id)
         {
-            this._inventoryMgmtService.DeleteItem(id);
+            if (id > 0) 
+            {
+                this._inventoryMgmtService.DeleteItem(id).Wait();
+                return;
+            }
+            throw new Exception($"id should not be 0, please check contract");
         }
     }
 }
