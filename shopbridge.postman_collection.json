@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "460b8662-437d-4b18-9d3f-3772d44d9ea8",
+		"name": "tb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetItems",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44362/api/Inventory/GetItems",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"Inventory",
+						"GetItems"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddItem",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"{\\n\\n    \\\"name\\\": \\\"Icecream 4\\\",\\n    \\\"description\\\": \\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mattis et lectus quis maximus. Curabitur at gravida metus. Mauris placerat semper nisl, a fermentum leo egestas eu.\\\",\\n    \\\"category\\\": \\\"Food\\\",\\n    \\\"price\\\": 1111111.00\\n}\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/Inventory/AddItem",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"Inventory",
+						"AddItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddItem Fail",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"{\\n\\n    \\\"name\\\": \\\"Icecream 4\\\",\\n    \\\"description\\\": \\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mattis et lectus quis maximus. Curabitur at gravida metus. Mauris placerat semper nisl, a fermentum leo egestas eu.\\\",\\n    \\\"category\\\": \\\"Food\\\",\\n    \\\"price\\\": 1111111.00\\n}\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/Inventory/AddItem",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"Inventory",
+						"AddItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateItem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"{\\n\\n   \\\"itemid\\\": 14,\\n  \\\"name\\\": \\\"Icecream 4\\\",\\n    \\\"description\\\": \\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mattis et lectus quis maximus. Curabitur at gravida metus. Mauris placerat semper nisl, a fermentum leo egestas eu.\\\",\\n    \\\"category\\\": \\\"Food\\\",\\n    \\\"price\\\": 130.00\\n}\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/Inventory/UpdateItem",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"Inventory",
+						"UpdateItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteItem",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "null",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/Inventory/DeleteItem",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"Inventory",
+						"DeleteItem"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
